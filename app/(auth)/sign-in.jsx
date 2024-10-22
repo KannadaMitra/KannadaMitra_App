@@ -53,6 +53,7 @@ export default function Page() {
 
   return (
     <View className="flex-1 justify-center items-center bg-gray-50 px-6">
+      <Text >Kannada Duolingo</Text>
         <Text className="text-4xl font-extrabold text-teal-600 mb-6">Sign in</Text>
         {
             error && (
