@@ -2,12 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ProgressBarAndroid } from 'react-native';
 import { useUser } from '@clerk/clerk-expo';
 
-const ProfileScreen = (props) => {
-  const { user } = useUser();
-  console.log(user);
-  const username = user && user.firstName ? user.firstName : 'User';
+const ProfileScreen = () => {
   return (
-    console.log(props.name),
     <View style={styles.container}>
       {/* Header with Avatar and Name */}
       <View style={styles.header}>
@@ -16,7 +12,7 @@ const ProfileScreen = (props) => {
           style={styles.avatar} 
         />
        
-        <Text style={styles.username}>{username}</Text>
+        <Text style={styles.username}></Text>
         <Text style={styles.level}>Level 5</Text>
       </View>
 
