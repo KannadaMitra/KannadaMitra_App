@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity , Platform , StatusBar} from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity , Platform , StatusBar,StyleSheet} from 'react-native';
 import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
   const router = useRouter();
-  const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0;
+  const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0.5;
 
   return (
-    <View className="flex-1 bg-gray-50 pt-6">
+    <View className="flex-1 bg-gray-50" style={{paddingTop:statusBarHeight}}>
       {/* Welcome Banner */}
-      <View className="bg-teal-600 rounded-lg mx-6 p-4 mb-4 shadow " >
+      <View className="bg-teal-600 rounded-lg mx-6 p-2 mb-4 shadow " >
       
         <Text className="text-2xl text-white font-bold">Welcome back, User!</Text>
         <Text className="text-white">Keep up your streak! 🎯</Text>
@@ -47,14 +47,14 @@ export default function HomeScreen() {
       </View>
 
       {/* Bottom Navigation */}
-      <View className="flex-row justify-around bg-gray-200 py-2 rounded-lg h-[80px]">
+      <View className="flex-row justify-around bg-gray-200 rounded-lg gap-x-10 p-6">
         <TouchableOpacity onPress={() => router.push('/home')}>
           <Text className="text-teal-600 font-bold">🏠 Home</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => router.push('/leaderboard')}>
           <Text className="text-teal-600 font-bold">🏆 Leaderboard</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.push('/')}>
+        <TouchableOpacity onPress={() => router.push('/profile')}>
           <Text className="text-teal-600 font-bold">👤 Profile</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => router.push('/settings')}>
