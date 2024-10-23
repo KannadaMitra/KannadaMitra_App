@@ -1,14 +1,16 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity , Platform , StatusBar} from 'react-native';
 import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
   const router = useRouter();
+  const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0;
 
   return (
     <View className="flex-1 bg-gray-50 pt-6">
       {/* Welcome Banner */}
-      <View className="bg-teal-600 rounded-lg mx-6 p-4 mb-4 shadow">
+      <View className="bg-teal-600 rounded-lg mx-6 p-4 mb-4 shadow " >
+      
         <Text className="text-2xl text-white font-bold">Welcome back, User!</Text>
         <Text className="text-white">Keep up your streak! 🎯</Text>
       </View>
@@ -45,7 +47,7 @@ export default function HomeScreen() {
       </View>
 
       {/* Bottom Navigation */}
-      <View className="flex-row justify-around bg-gray-200 py-2 rounded-lg">
+      <View className="flex-row justify-around bg-gray-200 py-2 rounded-lg h-[80px]">
         <TouchableOpacity onPress={() => router.push('/home')}>
           <Text className="text-teal-600 font-bold">🏠 Home</Text>
         </TouchableOpacity>
