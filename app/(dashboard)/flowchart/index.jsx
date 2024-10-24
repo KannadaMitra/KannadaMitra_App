@@ -1,5 +1,7 @@
 import React from 'react';
-import { ScrollView, View, TouchableOpacity, Text, StyleSheet, Dimensions,Platform,StatusBar } from 'react-native';
+import { ScrollView, View, TouchableOpacity, Text, StyleSheet, Platform, StatusBar } from 'react-native';
+import { Footer } from '../../../components/footer';
+import { Header } from '../../../components/header';
 
 // Get screen width
 const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0.5;
@@ -8,29 +10,36 @@ const ZigZagScroll = () => {
   const buttons = Array.from({ length: 10 }, (_, index) => `Button ${index + 1}`);
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer} style={{padding:statusBarHeight}}>
-      {buttons.map((buttonLabel, index) => (
-        <View
-          key={index}
-          style={[
-            styles.buttonContainer,
-            index % 2 === 0 ? styles.leftAligned : styles.rightAligned, // Alternating zig-zag alignment
-          ]}
-        >
-          <TouchableOpacity style={styles.roundButton}>
-            <Text style={styles.buttonText}>{buttonLabel}</Text>
-          </TouchableOpacity>
-        </View>
-      ))}
-    </ScrollView>
+    <View style={[styles.container, { paddingTop: statusBarHeight } ]}>
+      <Header />
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        {buttons.map((buttonLabel, index) => (
+          <View
+            key={index}
+            style={[
+              styles.buttonContainer,
+              index % 2 === 0 ? styles.leftAligned : styles.rightAligned, // Alternating zig-zag alignment
+            ]}
+          >
+            <TouchableOpacity style={styles.roundButton}>
+              <Text style={styles.buttonText}>{buttonLabel}</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </ScrollView>
+      <Footer style={styles.footer} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   scrollContainer: {
     paddingVertical: 20,
     paddingHorizontal: 20,
-    flexGrow: 1,
+    paddingBottom: 100, // Ensure content is not hidden behind the footer
   },
   buttonContainer: {
     marginBottom: 50,
@@ -64,6 +73,13 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    backgroundColor: '#E5E7EB',
+    padding: 10,
   },
 });
 
