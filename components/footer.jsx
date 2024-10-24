@@ -21,7 +21,7 @@ export const Footer = () => {
       <TouchableOpacity onPress={() => router.push('/feed')}>
         <View style={styles.iconContainer}>
           <SettingsIcon color="black" size={30} />
-          <Text style={styles.iconText}>Settings</Text>
+          <Text style={styles.iconText}>Feed</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => router.push('/profile')}>

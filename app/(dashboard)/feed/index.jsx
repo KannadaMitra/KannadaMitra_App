@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity,Platform,StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Footer } from '../../../components/footer';
 
 const LessonCard = ({ title, description, icon, color }) => (
   <TouchableOpacity style={[styles.card, { backgroundColor: color }]}>
@@ -19,10 +20,12 @@ const ProgressBar = ({ progress }) => (
     />
   </View>
 );
+const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 20;
 
 const Feed = () => {
   return (
-    <ScrollView style={styles.container}>
+    <View style={[styles.container, { paddingTop: statusBarHeight }]}>
+    <ScrollView style={styles.view}>
       <Text style={styles.header}>Your Lessons</Text>
       <ProgressBar progress={75} />
       <Text style={styles.progressText}>75% Complete</Text>
@@ -51,15 +54,24 @@ const Feed = () => {
         icon="users"
         color="#2B70C9"
       />
+      
     </ScrollView>
+    <Footer />
+    </View>
+     
   );
+ 
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5F5F5',
-    padding: 16,
+  },
+  view:{
+    flex: 1,
+    backgroundColor: '#F5F5F5',
+    padding: 10,
   },
   header: {
     fontSize: 24,
