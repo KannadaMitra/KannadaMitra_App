@@ -26,9 +26,16 @@ const ZigZagScroll = () => {
               </TouchableOpacity>
             </View>
             {index < buttons.length - 1 && (
-              <View style={styles.ladderContainer}>
+              <View
+                style={[
+                  styles.ladderContainer,
+                  index % 2 === 0 ? styles.ladderLeft : styles.ladderRight,
+                ]}
+              >
                 <View style={styles.ladder}>
-                  <View style={styles.redSpot} />
+                  <View style={styles.redDot} />
+                  <View style={styles.redDot} />
+                  <View style={styles.redDot} />
                 </View>
               </View>
             )}
@@ -88,22 +95,31 @@ const styles = StyleSheet.create({
   ladderContainer: {
     height: 50, // Adjust height as needed
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ladderLeft: {
+    transform: [{ rotate: '-45deg' }],
+    marginLeft: -25, // Adjust to position correctly
+  },
+  ladderRight: {
+    transform: [{ rotate: '45deg' }],
+    marginRight: -25, // Adjust to position correctly
   },
   ladder: {
-    width: 10,
-    height: '100%',
-    backgroundColor: '#DEB887', // Bright wood color
+    width: 160, // Adjust width as needed
+    height: 15,
+    backgroundColor: '#E5E7EB', // Bright wood color
     position: 'relative',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
   },
-  redSpot: {
-    width: 10,
-    height: 10,
-    backgroundColor: 'red',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: [{ translateX: -5 }, { translateY: -5 }],
-    borderRadius: 5,
+  redDot: {
+    width: 5,
+    height: 5,
+    backgroundColor: 'green',
+    borderRadius: 2.5,
+    marginHorizontal: 5,
+    
   },
   footer: {
     position: 'absolute',
