@@ -7,7 +7,6 @@ import {
 } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import { Text, View, TouchableOpacity } from "react-native";
-import { db } from "../db";
 
 export default function Page() {
   const router = useRouter();
@@ -17,7 +16,7 @@ export default function Page() {
   const handleLogout = async () => {
     try {
       await signOut();
-      router.replace("/home");
+      router.replace('/home');
     } catch (error) {
       console.log("Error logging out: ", error);
     }
