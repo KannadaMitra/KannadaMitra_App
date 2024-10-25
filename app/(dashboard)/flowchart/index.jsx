@@ -12,6 +12,7 @@ const ZigZagScroll = () => {
   const [completedLessons, setCompletedLessons] = useState([false, false, false, false, false, false, false, false, false, false]);
   // State to track progress of each lesson
   const [progress, setProgress] = useState(Array(10).fill(0));
+  const [progressbtn, setProgressbtn] = useState(0);
 
   const buttons = Array.from({ length: 10 }, (_, index) => `Button ${index + 1}`);
 
