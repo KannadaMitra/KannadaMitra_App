@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, View, TouchableOpacity, Text, StyleSheet, Platform, StatusBar, Button, Alert } from 'react-native';
 import { Footer } from '../../../components/footer';
 import { Header } from '../../../components/header';
+import * as Progress from 'react-native-progress';
 
 // Get status bar height
 const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 20;
@@ -9,22 +10,31 @@ const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 20
 const ZigZagScroll = () => {
   // State to track which lessons are completed
   const [completedLessons, setCompletedLessons] = useState([false, false, false, false, false, false, false, false, false, false]);
-  // State to track the progress of each lesson
-  const [progress, setProgress] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  // State to track progress of each lesson
+  const [progress, setProgress] = useState(Array(10).fill(0));
 
   const buttons = Array.from({ length: 10 }, (_, index) => `Button ${index + 1}`);
+
+  const handleProgress = (index) => {
+    const updatedProgress = [...progress];
+    if (updatedProgress[index] < 1) {
+      // Increment progress until it fills up
+      updatedProgress[index] += 0.1;
+      setProgress(updatedProgress);
+
+      // Check if progress is complete
+      if (updatedProgress[index] >= 1) {
+        handleCompleteLesson(index);
+      }
+    }
+  };
 
   const handleCompleteLesson = (index) => {
     // Mark the lesson as completed
     const updatedLessons = [...completedLessons];
     updatedLessons[index] = true;
     setCompletedLessons(updatedLessons);
-
-    // Update the progress of the lesson to 100%
-    const updatedProgress = [...progress];
-    updatedProgress[index] = 100;
-    setProgress(updatedProgress);
-
+    
     Alert.alert(`Lesson ${index + 1} completed!`, `You can now access the next lesson.`);
   };
 
@@ -41,12 +51,19 @@ const ZigZagScroll = () => {
               ]}
             >
               <TouchableOpacity
-                style={[styles.roundButton, { opacity: (index === 0 || progress[index - 1] === 100) ? 1 : 0.5 }]}
-                onPress={() => handleCompleteLesson(index)}
-                disabled={!(index === 0 || progress[index - 1] === 100)}
+                style={[styles.roundButton, { opacity: (index === 0 || completedLessons[index - 1]) ? 1 : 0.5 }]}
+                onPress={() => handleProgress(index)}
+                disabled={!(index === 0 || completedLessons[index - 1])}
               >
                 <Text style={styles.buttonText}>{buttonLabel}</Text>
               </TouchableOpacity>
+              {/* Progress Bar */}
+              <Progress.Bar
+                progress={progress[index]}
+                width={150}
+                color="#6cc24a"
+                style={styles.progressBar}
+              />
             </View>
             {index < buttons.length - 1 && (
               <View
@@ -114,6 +131,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  progressBar: {
+    marginTop: 10,
   },
   ladderContainer: {
     height: 50, // Adjust height as needed
