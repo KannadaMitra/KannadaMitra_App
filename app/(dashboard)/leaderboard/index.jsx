@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Image,Platform,StatusBar } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Footer } from '../../../components/footer';
 
 
 const data = [
@@ -34,6 +35,7 @@ const Leaderboard = () => {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
+      <Footer/>
     </View>
   );
 };

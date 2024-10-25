@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ProgressBarAndroid } from 'react-native';
 import { useUser } from '@clerk/clerk-expo';
 import { CpuIcon, LockIcon, SettingsIcon, TrophyIcon } from 'lucide-react-native';
+import { Footer } from '../../../components/footer';
 
 const ProfileScreen = () => {
   return (
@@ -43,6 +44,7 @@ const ProfileScreen = () => {
           <Text style={styles.buttonText}><LockIcon color="black"/> Account</Text>
         </TouchableOpacity>
       </View>
+      <Footer/>
     </View>
   );
 };
