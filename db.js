@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const uri = process.env.MONGO_URL;
 
-async function db() {
+async function mongoConnect() {
   try {
     await mongoose.connect(uri, {
       useNewUrlParser: true,
@@ -14,4 +14,4 @@ async function db() {
   }
 }
 
-module.exports = { db };
+module.exports = { mongoConnect };

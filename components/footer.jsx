@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 5,
+    backgroundColor: "red",
   },
   activeIconContainer: {
     backgroundColor: "#D1D5DB",
