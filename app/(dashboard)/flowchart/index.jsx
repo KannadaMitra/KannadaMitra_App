@@ -1,5 +1,5 @@
-import React from 'react';
-import { ScrollView, View, TouchableOpacity, Text, StyleSheet, Platform, StatusBar } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, View, TouchableOpacity, Text, StyleSheet, Platform, StatusBar, Button, Alert } from 'react-native';
 import { Footer } from '../../../components/footer';
 import { Header } from '../../../components/header';
 
@@ -7,7 +7,26 @@ import { Header } from '../../../components/header';
 const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 20;
 
 const ZigZagScroll = () => {
+  // State to track which lessons are completed
+  const [completedLessons, setCompletedLessons] = useState([false, false, false, false, false, false, false, false, false, false]);
+  // State to track the progress of each lesson
+  const [progress, setProgress] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
   const buttons = Array.from({ length: 10 }, (_, index) => `Button ${index + 1}`);
+
+  const handleCompleteLesson = (index) => {
+    // Mark the lesson as completed
+    const updatedLessons = [...completedLessons];
+    updatedLessons[index] = true;
+    setCompletedLessons(updatedLessons);
+
+    // Update the progress of the lesson to 100%
+    const updatedProgress = [...progress];
+    updatedProgress[index] = 100;
+    setProgress(updatedProgress);
+
+    Alert.alert(`Lesson ${index + 1} completed!`, `You can now access the next lesson.`);
+  };
 
   return (
     <View style={[styles.container, { paddingTop: statusBarHeight }]}>
@@ -21,7 +40,11 @@ const ZigZagScroll = () => {
                 index % 2 === 0 ? styles.leftAligned : styles.rightAligned, // Alternating zig-zag alignment
               ]}
             >
-              <TouchableOpacity style={styles.roundButton}>
+              <TouchableOpacity
+                style={[styles.roundButton, { opacity: (index === 0 || progress[index - 1] === 100) ? 1 : 0.5 }]}
+                onPress={() => handleCompleteLesson(index)}
+                disabled={!(index === 0 || progress[index - 1] === 100)}
+              >
                 <Text style={styles.buttonText}>{buttonLabel}</Text>
               </TouchableOpacity>
             </View>
@@ -119,7 +142,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
     borderRadius: 2.5,
     marginHorizontal: 5,
-    
   },
   footer: {
     position: 'absolute',

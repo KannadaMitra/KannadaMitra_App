@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { HomeIcon, SettingsIcon, TrophyIcon, UserIcon } from 'lucide-react-native';
+import { BookMarkedIcon, HomeIcon, TrophyIcon, UserIcon } from 'lucide-react-native';
 
 export const Footer = () => {
   const router = useRouter();
@@ -20,7 +20,7 @@ export const Footer = () => {
       </TouchableOpacity>
       <TouchableOpacity onPress={() => router.push('/feed')}>
         <View style={styles.iconContainer}>
-          <SettingsIcon color="black" size={30} />
+          <BookMarkedIcon color="black" size={30} />
           <Text style={styles.iconText}>Feed</Text>
         </View>
       </TouchableOpacity>
