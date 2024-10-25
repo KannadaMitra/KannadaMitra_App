@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ProgressBarAndroid } from 'react-native';
 import { useUser } from '@clerk/clerk-expo';
+import { CpuIcon, LockIcon, SettingsIcon, TrophyIcon } from 'lucide-react-native';
 
 const ProfileScreen = () => {
   return (
@@ -12,10 +13,13 @@ const ProfileScreen = () => {
           style={styles.avatar} 
         />
        
-        <Text style={styles.username}></Text>
-        <Text style={styles.level}>Level 5</Text>
+        
+       
       </View>
-
+      <View>
+      <Text style={styles.username}>Venkata Lokesh Vemuri</Text>
+      <Text style={styles.level}>Level 5</Text>
+      </View>
       {/* XP Progress */}
       <View style={styles.xpContainer}>
         <Text style={styles.xpText}>XP: 1450 / 2000</Text>
@@ -30,13 +34,13 @@ const ProfileScreen = () => {
       {/* Buttons for Achievements, Settings, and Account */}
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>🏆 Achievements</Text>
+          <Text style={styles.buttonText}><TrophyIcon color="black"/> Achievements</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>⚙️ Settings</Text>
+          <Text style={styles.buttonText}><SettingsIcon color="black"/>Settings</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>🔒 Account</Text>
+          <Text style={styles.buttonText}><LockIcon color="black"/> Account</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -46,31 +50,43 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
-    padding: 20,
+    backgroundColor: '#d1d5db',
+    // padding: 20,
   },
   header: {
     alignItems: 'center',
     marginVertical: 20,
-  },
+    height: 250,
+    marginTop: 0,
+    width: '100%',
+    backgroundColor:'#000000',
+    
+
+   },
   avatar: {
     width: 100,
     height: 100,
     borderRadius: 50,
-    marginBottom: 10,
+    marginTop: 40,
   },
   username: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#000000',
+    textAlign:"center"
   },
   level: {
     fontSize: 16,
-    color: '#888',
+    color: '#000000',
+     textAlign:"center"
   },
   xpContainer: {
-    marginVertical: 20,
+    marginVertical: 9,
     paddingHorizontal: 10,
+    backgroundColor:'#ffffff',
+    padding:10,
+    borderRadius:10,
+    width:'100%',
   },
   xpText: {
     fontSize: 14,
@@ -79,20 +95,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonContainer: {
-    flex: 1,
+    flex: 0.5,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   button: {
     backgroundColor: '#ffffff',
     padding: 15,
-    marginVertical: 10,
+    marginVertical: 5,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
-    elevation: 2,
+    elevation: 5,
     alignItems: 'center',
+    width:'90%',
   },
   buttonText: {
     fontSize: 18,
